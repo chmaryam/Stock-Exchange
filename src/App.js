@@ -1,4 +1,4 @@
-import React, { useState,useEffect } from 'react'
+import React, { useState, useEffect } from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import Axios from 'axios'
 import jwt_decode from 'jwt-decode'
@@ -11,6 +11,9 @@ export default function App() {
 
   const [IsAuth,setIsAuth] = useState(false)
   const [user,setUser] = useState({})
+  const [data, setData] = useState(null);
+  const [error, setError] = useState(null);
+  const [apiSymbol, setApiSymbol] = useState("IBM")
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -27,6 +30,17 @@ export default function App() {
 
       }
     }
+
+    Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=7URDWPHHFLX445FN`)
+      .then((response) => {
+        setData(response.data);
+        console.log(response.data["Meta Data"])
+        console.log(response.data["Meta Data"]["2. Symbol"])
+        console.log(response.data["Time Series (Daily)"])
+      })
+      .catch((error) => {
+        setError(error);
+      });
   }, [])
 
   const registerHandler = (user) => {
@@ -64,7 +78,6 @@ export default function App() {
     setIsAuth(false)
     setUser(null)
   }
-
   return (
     <div>
         <Router>
