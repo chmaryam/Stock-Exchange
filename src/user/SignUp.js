@@ -45,14 +45,6 @@ export default function SignUp(props) {
             <Form.Control name="phoneNumber" onChange={changeHandler} required/>
         </Form.Group>
 
-        <Form.Group>
-            <Form.Label>Role</Form.Label>
-            <select onChange={changeHandler}>
-                <option name="role">Investor</option>
-                {/* <option name="role"></option> */}
-            </select>
-        </Form.Group>
-
         <Button variant="primary" onClick={registerHandler}>Register</Button>
     </Container>
     </div>
