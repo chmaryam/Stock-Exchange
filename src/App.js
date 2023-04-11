@@ -5,13 +5,20 @@ import jwt_decode from 'jwt-decode'
 // import {SignIn, SignUp} from 'reactbootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-import Container from 'react-bootstrap/Container'
+
+
+
+import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-// import Container from 'react-bootstrap/Container';
-// import Nav from 'react-bootstrap/Nav';
-// import Navbar from 'react-bootstrap/Navbar';
+
+// footer
+import Card from 'react-bootstrap/Card';
+
+
+
+
 
 // // import Nav from 'react-brap/Nav';
 // // import Navbar from 'react-bootstrap/Navbar';
@@ -21,6 +28,7 @@ import './App.css'
 // Imported Components
 import SignUp from './user/SignUp'
 import SignIn from './user/SignIn'
+import Home from './home/Home';
 
 export default function App() {
 
@@ -94,13 +102,8 @@ export default function App() {
     setUser(null)
   }
   return (
-
-      
-
-   
+    <>
         <Router>
-        <div>
-
         <Navbar bg="dark" variant="dark">
         <Container>
           <Navbar.Brand >Stock Exchange</Navbar.Brand>
@@ -114,30 +117,22 @@ export default function App() {
           </Nav>
         </Container>
       </Navbar>
-          
-            <div >
-              
-               
-              
-            </div>
-          
-        </div>
-
-        <div>
           <Routes>
-              <Route path="/" element={<SignIn login={loginHandler}/>}/>
+              {/* <Route path="/"/> */}
               <Route path="/signup" element={<SignUp register={registerHandler} />}/>
-              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>}/>
+
+              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>}   style={{padding: 4}}/>
               </Routes>
-              </div>
             </Router>
             
- 
-
-      
-
-    
-
+    <Card id="footer">
+        <Card.Footer >
+          <small  style={{color: 'whitesmoke' , marginLeft: 600 , postition: 'relative' ,
+        fontFamily: 'serif' , fontSize: 17 
+        }}>Copy Rights Reserved 2023</small>
+        </Card.Footer>
+    </Card>
+            </>
+            
   )
- 
 }
