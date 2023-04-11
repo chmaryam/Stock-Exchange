@@ -2,6 +2,21 @@ import React, { useState, useEffect } from 'react'
 import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import Axios from 'axios'
 import jwt_decode from 'jwt-decode'
+// import {SignIn, SignUp} from 'reactbootstrap'
+import 'bootstrap/dist/css/bootstrap.min.css';
+
+import Container from 'react-bootstrap/Container'
+import Nav from 'react-bootstrap/Nav';
+import Navbar from 'react-bootstrap/Navbar';
+
+// import Container from 'react-bootstrap/Container';
+// import Nav from 'react-bootstrap/Nav';
+// import Navbar from 'react-bootstrap/Navbar';
+
+// // import Nav from 'react-brap/Nav';
+// // import Navbar from 'react-bootstrap/Navbar';
+
+import './App.css'
 
 // Imported Components
 import SignUp from './user/SignUp'
@@ -79,17 +94,33 @@ export default function App() {
     setUser(null)
   }
   return (
-    <div>
+
+      
+
+   
         <Router>
         <div>
-          <nav>
-            <div>
-              <Link to="/">Home</Link> &nbsp;
-              <Link to="/signup">Signup</Link> &nbsp;
-              <Link to="/signin">Signin</Link> &nbsp;
-              <Link to="/logout" onClick={logoutHandler}>logout</Link> &nbsp;
+
+        <Navbar bg="dark" variant="dark">
+        <Container>
+          <Navbar.Brand >Stock Exchange</Navbar.Brand>
+          <Nav className="me-auto">
+            
+            <Nav.Link as={Link} to="/">Home</Nav.Link>
+            <Nav.Link as={Link} to="/signup">signup</Nav.Link>
+            <Nav.Link as={Link} to="/signin">Signin</Nav.Link>
+            <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
+            
+          </Nav>
+        </Container>
+      </Navbar>
+          
+            <div >
+              
+               
+              
             </div>
-          </nav>
+          
         </div>
 
         <div>
@@ -100,6 +131,13 @@ export default function App() {
               </Routes>
               </div>
             </Router>
-    </div>
+            
+ 
+
+      
+
+    
+
   )
+ 
 }
