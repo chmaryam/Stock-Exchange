@@ -110,9 +110,9 @@ export default function App() {
           <Nav className="me-auto">
             
             <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/signup">signup</Nav.Link>
-            <Nav.Link as={Link} to="/signin">Signin</Nav.Link>
-            <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
+            <Nav.Link as={Link} to="/signup">Sign up</Nav.Link>
+            <Nav.Link as={Link} to="/signin">Sign in</Nav.Link>
+            <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>Logout</Nav.Link>
             
           </Nav>
         </Container>
@@ -121,7 +121,7 @@ export default function App() {
               {/* <Route path="/"/> */}
               <Route path="/signup" element={<SignUp register={registerHandler} />}/>
 
-              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>}   style={{padding: 4}}/>
+              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>} />
               </Routes>
             </Router>
             

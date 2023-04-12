@@ -30,7 +30,7 @@ export default function SignIn(props) {
             <Form.Control name="password" onChange={ChangeHandler}/>
         </Form.Group>
 
-        <Button variant="primary" onClick={loginHandler}>
+        <Button variant="primary" onClick={loginHandler} style={{marginTop: 15}}  >
             Login
         </Button>
     </Container>
