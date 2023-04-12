@@ -22,12 +22,12 @@ export default function SignIn(props) {
     <Container >
         <Form.Group>
             <Form.Label>Email Address</Form.Label>
-            <Form.Control name="emailAddress" onChange={ChangeHandler}/>
+            <Form.Control name="emailAddress" type='email' onChange={ChangeHandler}/>
         </Form.Group>
 
         <Form.Group>
             <Form.Label>Password</Form.Label>
-            <Form.Control name="password" onChange={ChangeHandler}/>
+            <Form.Control name="password" type='password' onChange={ChangeHandler}/>
         </Form.Group>
 
         <Button variant="primary" onClick={loginHandler}>

@@ -16,14 +16,13 @@ import './App.css'
 import Home from './home/Home'
 import SignUp from './user/SignUp'
 import SignIn from './user/SignIn'
+import Stock from './stock/Stock';
+import AdvisorList from './advisor/AdvisorList';
 
 export default function App() {
 
   const [isAuth,setIsAuth] = useState(false)
   const [user,setUser] = useState({})
-  const [data, setData] = useState(null);
-  const [error, setError] = useState(null);
-  const [apiSymbol, setApiSymbol] = useState("IBM")
 
   const navigate = useNavigate()
 
@@ -42,17 +41,6 @@ export default function App() {
     }
   }, [])
 
-    // Axios.get(`https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=IBM&apikey=7URDWPHHFLX445FN`)
-    //   .then((response) => {
-    //     setData(response.data);
-    //     console.log(response.data["Meta Data"])
-    //     console.log(response.data["Meta Data"]["2. Symbol"])
-    //     console.log(response.data["Time Series (Daily)"])
-    //   })
-    //   .catch((error) => {
-    //     setError(error);
-    //   });
-
   const registerHandler = (user) => {
     Axios.post("auth/signup",user)
     .then(res => {
@@ -69,7 +57,6 @@ export default function App() {
   const loginHandler = (cred) => {
     Axios.post("auth/signin", cred)
     .then(res => {
-      console.log(res.data.token)
       // save the token into local storage
       let token = res.data.token
       if(token != null){
@@ -99,13 +86,17 @@ export default function App() {
         <div>
           <Navbar bg="dark" variant="dark">
           <Container>
-            <Navbar.Brand >Stock Exchange</Navbar.Brand>
+            {/* <Navbar.Brand >Stock Exchange</Navbar.Brand> */}
+            <Navbar.Brand >
+              <Nav.Link as={Link} to="/">Stock Exchange</Nav.Link>
+            </Navbar.Brand>
             <Nav className="me-auto">
           
-              <Nav.Link as={Link} to="/">Home</Nav.Link>
               {isAuth ? (
                 <>
-                  <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
+                  <Nav.Link as={Link} to="/stock">Market</Nav.Link>
+                  <Nav.Link as={Link} to="/advisors">Advisors</Nav.Link>
+                  <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>Log Out</Nav.Link>
                 </>
               ) : (
                 <>
@@ -130,6 +121,16 @@ export default function App() {
                   <Home/>
                   :
                   <SignIn login={loginHandler} style={{padding: 4}}/>}/>
+                  
+                  {isAuth ? (
+                    <>
+                      <Route path='/stock' element={<Stock/>}/>
+                      <Route path='/advisors' element={<AdvisorList/>}/>
+                    </>
+                  ) : (
+                    <>
+                    </>
+                  )}
                 </Routes>
               
               <Card id="footer">
