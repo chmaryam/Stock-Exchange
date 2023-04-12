@@ -1,5 +1,5 @@
 import React, { useState, useEffect} from 'react'
-import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom"
 import Axios from 'axios'
 import jwt_decode from 'jwt-decode'
 // import {SignIn, SignUp} from 'reactbootstrap'
@@ -26,10 +26,10 @@ import Card from 'react-bootstrap/Card';
 import './App.css'
 
 // Imported Components
+import Home from './home/Home'
 import SignUp from './user/SignUp'
 import SignIn from './user/SignIn'
 
-import Home from './home/Home'
 
 
 
@@ -41,6 +41,8 @@ export default function App() {
   const [data, setData] = useState(null);
   const [error, setError] = useState(null);
   const [apiSymbol, setApiSymbol] = useState("IBM")
+
+  const navigate = useNavigate()
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -72,6 +74,9 @@ export default function App() {
     Axios.post("auth/signup",user)
     .then(res => {
       console.log(res)
+      let path = "/signin"
+      navigate(path)
+
     })
     .catch(err => {
       console.log(err)
@@ -90,6 +95,8 @@ export default function App() {
         let user = jwt_decode(token)
         setIsAuth(true)
         setUser(user)
+        let path = "/"
+        navigate(path)
       }
     })
     .catch(err => {
@@ -105,83 +112,50 @@ export default function App() {
     setUser(null)
   }
 
-  
- console.log(isAuth)
-
   return (
-    <>
-        <Router>
-
         <div>
-          <nav>
-            <div>
-              <nav>
-              <Link to="/">Home</Link> &nbsp;
+          <Navbar bg="dark" variant="dark">
+          <Container>
+            <Navbar.Brand >Stock Exchange</Navbar.Brand>
+            <Nav className="me-auto">
+          
+              <Nav.Link as={Link} to="/">Home</Nav.Link>
               {isAuth ? (
                 <>
-                  <Link to="/" onClick={logoutHandler}>Logout</Link>&nbsp;
+                  <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
                 </>
-            ): (
+              ) : (
                 <>
-                  <Link to='/signin'>Sign In</Link>&nbsp;
-                  <Link to='/signup'>Sign Up</Link>&nbsp;
+                  <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
+                  <Nav.Link as={Link} to="/signin">Sign In</Nav.Link>
                 </>
-            )}
-              </nav>
-            </div>
-          </nav>
-        </div>
-
-        <div>
-          <Routes>
+              )}
+          
+          
+            </Nav>
+          </Container>
+                </Navbar>
+            <Routes>
               <Route path="/" element={<Home/>}/>
-
-              <Route path="/signup" element={
-                isAuth ? 
-                <Home/>
-                :
-              <SignUp register={registerHandler} />}/>
-
-              <Route path="/signin" element={
-                isAuth ?
-                // <Route path="/" element={<Home/>}/>
-                <Home/>
-                :
-                <SignIn login={loginHandler}/>}/>
-=======
-        <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand >Stock Exchange</Navbar.Brand>
-          <Nav className="me-auto">
-            
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/signup">signup</Nav.Link>
-            <Nav.Link as={Link} to="/signin">Signin</Nav.Link>
-            <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
-            
-          </Nav>
-        </Container>
-      </Navbar>
-          <Routes>
-              {/* <Route path="/"/> */}
-              <Route path="/signup" element={<SignUp register={registerHandler} />}/>
-
-              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>}   style={{padding: 4}}/>
-
-              </Routes>
-            </Router>
-            
-    <Card id="footer">
-        <Card.Footer >
-          <small  style={{color: 'whitesmoke' , marginLeft: 600 , postition: 'relative' ,
-        fontFamily: 'serif' , fontSize: 17 
-        }}>Copy Rights Reserved 2023</small>
-        </Card.Footer>
-    </Card>
-            </>
-            
+                <Route path="/signup" element={
+                  isAuth ?
+                  <Home/>
+                  :
+                <SignUp register={registerHandler} />}/>
+                <Route path="/signin" element={
+                  isAuth ?
+                  <Home/>
+                  :
+                  <SignIn login={loginHandler} style={{padding: 4}}/>}/>
+                </Routes>
+              
+              <Card id="footer">
+          <Card.Footer >
+            <small  style={{color: 'whitesmoke' , marginLeft: 600 , postition: 'relative' ,
+          fontFamily: 'serif' , fontSize: 17
+          }}>Copy Rights Reserved 2023</small>
+          </Card.Footer>
+              </Card>
+        </div>      
   )
 }
-
-
-
