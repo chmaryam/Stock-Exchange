@@ -2,26 +2,13 @@ import React, { useState, useEffect} from 'react'
 import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom"
 import Axios from 'axios'
 import jwt_decode from 'jwt-decode'
-// import {SignIn, SignUp} from 'reactbootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-
-
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
-
 // footer
 import Card from 'react-bootstrap/Card';
-
-
-
-
-
-// // import Nav from 'react-brap/Nav';
-// // import Navbar from 'react-bootstrap/Navbar';
 
 import './App.css'
 
@@ -29,10 +16,6 @@ import './App.css'
 import Home from './home/Home'
 import SignUp from './user/SignUp'
 import SignIn from './user/SignIn'
-
-
-
-
 
 export default function App() {
 
