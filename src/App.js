@@ -148,37 +148,7 @@ export default function App() {
                 <Home/>
                 :
                 <SignIn login={loginHandler}/>}/>
-=======
-        <Navbar bg="dark" variant="dark">
-        <Container>
-          <Navbar.Brand >Stock Exchange</Navbar.Brand>
-          <Nav className="me-auto">
-            
-            <Nav.Link as={Link} to="/">Home</Nav.Link>
-            <Nav.Link as={Link} to="/signup">signup</Nav.Link>
-            <Nav.Link as={Link} to="/signin">Signin</Nav.Link>
-            <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>logout</Nav.Link>
-            
-          </Nav>
-        </Container>
-      </Navbar>
-          <Routes>
-              {/* <Route path="/"/> */}
-              <Route path="/signup" element={<SignUp register={registerHandler} />}/>
 
-              <Route path="/signin" element={<SignIn login={loginHandler}></SignIn>}   style={{padding: 4}}/>
-
-              </Routes>
-            </Router>
-            
-    <Card id="footer">
-        <Card.Footer >
-          <small  style={{color: 'whitesmoke' , marginLeft: 600 , postition: 'relative' ,
-        fontFamily: 'serif' , fontSize: 17 
-        }}>Copy Rights Reserved 2023</small>
-        </Card.Footer>
-    </Card>
-            </>
             
   )
 }
