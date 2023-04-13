@@ -17,7 +17,7 @@ export default function SignUp(props) {
     }
 
   return (
-    <div>
+    <div className='up-form'>
         <h1>Sign Up</h1>
         <Container>
         <Form.Group>

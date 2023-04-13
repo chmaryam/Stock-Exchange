@@ -1,8 +1,8 @@
 import React, {useState, useEffect} from 'react'
 import Axios from 'axios'
 import Advisor from './Advisor';
-// import AdvsiorCreateForm from './AdvisorCreateForm';
-// import AdvisorEditForm from './AdvisorEditForm';
+import AdvisorCreateForm from './AdvisorCreateForm';
+import AdvisorEditForm from './AdvisorEditForm';
 
 export default function AdvisorList() {
 
@@ -52,10 +52,10 @@ export default function AdvisorList() {
         })
         .then(res => {
             console.log(res.data.advisor)
-            let author = res.data.advisor
+            let advisor = res.data.advisor
             console.log("Loaded Author Information")
             setIsEdit(true)
-            setCurrentAdvisor(advisors)
+            setCurrentAdvisor(advisor)
         })
         .catch(err => {
             console.log("Error Loading Author Information")
@@ -105,24 +105,29 @@ export default function AdvisorList() {
     ))
 
   return (
-    <div>
+    <div className='advisor-list'>
         <h1>Advisors List</h1>
         <div>
             <table>
                 <tbody>
                     <tr>
-                        <th>Name</th>
-                        <th>Email Address</th>
+                    <th>Name</th>
+                    <th>EmailAddress</th>
+                    <th>Number</th>
+                    <th>Edit</th>
+                    <th>Delete</th>
                     </tr>
                     {allAdvisors}
                 </tbody>
             </table>
         </div>
-        {/* {(!isEdit) ?
+        <div className=''>
+        {(!isEdit) ? 
          <AdvisorCreateForm addAdvisor={addAdvisor}/>
-            :
-        <AdvisoorEditForm key={currentAdvisor._id} advisor={currentAdvisor} editAdvisor={editAdvisor}/>
-        } */}
+        :
+        <AdvisorEditForm key={currentAdvisor._id} advisor={currentAdvisor} editAdvisor={editAdvisor}/>
+        }
+        </div>
     </div>
   )
 }

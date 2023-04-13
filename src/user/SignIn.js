@@ -17,7 +17,7 @@ export default function SignIn(props) {
         props.login(newUser)
     }
   return (
-    <div>
+    <div className='up-form'>
         <h1>Sign in</h1>
     <Container >
         <Form.Group>

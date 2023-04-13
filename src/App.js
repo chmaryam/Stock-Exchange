@@ -7,6 +7,7 @@ import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 
+
 // footer
 import Card from 'react-bootstrap/Card';
 
@@ -25,6 +26,9 @@ export default function App() {
   const [user,setUser] = useState({})
 
   const navigate = useNavigate()
+
+  const date = new Date()
+  const currentYear = date.getFullYear()
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -80,15 +84,16 @@ export default function App() {
     localStorage.removeItem("token")
     setIsAuth(false)
     setUser(null)
+    let path = "/"
+    navigate(path)
   }
 
   return (
         <div>
           <Navbar bg="dark" variant="dark">
           <Container>
-            {/* <Navbar.Brand >Stock Exchange</Navbar.Brand> */}
-            <Navbar.Brand >
-              <Nav.Link as={Link} to="/">Stock Exchange</Nav.Link>
+            <Navbar.Brand className='navbar-b' >
+              <Nav.Link as={Link} to="/">Stock Market</Nav.Link>
             </Navbar.Brand>
             <Nav className="me-auto">
           
@@ -133,13 +138,18 @@ export default function App() {
                   )}
                 </Routes>
               
-              <Card id="footer">
+              {/* <Card id="footer">
           <Card.Footer >
             <small  style={{color: 'whitesmoke' , marginLeft: 600 , postition: 'relative' ,
-          fontFamily: 'serif' , fontSize: 17
+          fontFamily: 'serif' , fontSize: 15
           }}>Copy Rights Reserved 2023</small>
           </Card.Footer>
-              </Card>
+              </Card> */}
+              <footer>
+                <small>
+                  Copyright &copy; {currentYear} Stock Market, All Rights Reserved
+                </small>
+              </footer>
         </div>      
   )
 }
