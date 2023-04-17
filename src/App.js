@@ -1,8 +1,13 @@
 import React, { useState, useEffect} from 'react'
-import {BrowserRouter as Router, Routes, Route, Link, useNavigate} from "react-router-dom"
+import {BrowserRouter as Router, Routes, Route, Link} from "react-router-dom"
 import Axios from 'axios'
 import jwt_decode from 'jwt-decode'
+// import {SignIn, SignUp} from 'reactbootstrap'
 import 'bootstrap/dist/css/bootstrap.min.css';
+
+
+
+
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
@@ -11,14 +16,25 @@ import Navbar from 'react-bootstrap/Navbar';
 // footer
 import Card from 'react-bootstrap/Card';
 
+
+
+
+
+// // import Nav from 'react-brap/Nav';
+// // import Navbar from 'react-bootstrap/Navbar';
+
 import './App.css'
 
 // Imported Components
-import Home from './home/Home'
 import SignUp from './user/SignUp'
 import SignIn from './user/SignIn'
 import Stock from './stock/Stock';
 import AdvisorList from './advisor/AdvisorList';
+
+import Home from './home/Home'
+
+
+
 
 export default function App() {
 
@@ -29,6 +45,8 @@ export default function App() {
 
   const date = new Date()
   const currentYear = date.getFullYear()
+
+=======
 
   useEffect(() => {
     let token = localStorage.getItem("token")
@@ -49,9 +67,6 @@ export default function App() {
     Axios.post("auth/signup",user)
     .then(res => {
       console.log(res)
-      let path = "/signin"
-      navigate(path)
-
     })
     .catch(err => {
       console.log(err)
@@ -69,8 +84,6 @@ export default function App() {
         let user = jwt_decode(token)
         setIsAuth(true)
         setUser(user)
-        let path = "/"
-        navigate(path)
       }
     })
     .catch(err => {
@@ -88,8 +101,15 @@ export default function App() {
     navigate(path)
   }
 
+  
+ console.log(isAuth)
+
   return (
+    <>
+        <Router>
+
         <div>
+
           <Navbar bg="dark" variant="dark">
           <Container>
             <Navbar.Brand className='navbar-b' >
@@ -102,20 +122,31 @@ export default function App() {
                   <Nav.Link as={Link} to="/stock">Market</Nav.Link>
                   <Nav.Link as={Link} to="/advisors">Advisors</Nav.Link>
                   <Nav.Link as={Link} to="/logout" onClick={logoutHandler}>Log Out</Nav.Link>
-                </>
-              ) : (
+=======
+          <nav>
+            <div>
+              <nav>
+              <Link to="/">Home</Link> &nbsp;
+              {isAuth ? (
                 <>
-                  <Nav.Link as={Link} to="/signup">Sign Up</Nav.Link>
-                  <Nav.Link as={Link} to="/signin">Sign In</Nav.Link>
+                  <Link to="/" onClick={logoutHandler}>Logout</Link>&nbsp;
+
                 </>
-              )}
-          
-          
-            </Nav>
-          </Container>
-                </Navbar>
-            <Routes>
+            ): (
+                <>
+                  <Link to='/signin'>Sign In</Link>&nbsp;
+                  <Link to='/signup'>Sign Up</Link>&nbsp;
+                </>
+            )}
+              </nav>
+            </div>
+          </nav>
+        </div>
+
+        <div>
+          <Routes>
               <Route path="/" element={<Home/>}/>
+
                 <Route path="/signup" element={
                   isAuth ?
                   <Home/>
@@ -151,5 +182,25 @@ export default function App() {
                 </small>
               </footer>
         </div>      
+=======
+
+              <Route path="/signup" element={
+                isAuth ? 
+                <Home/>
+                :
+              <SignUp register={registerHandler} />}/>
+
+              <Route path="/signin" element={
+                isAuth ?
+                // <Route path="/" element={<Home/>}/>
+                <Home/>
+                :
+                <SignIn login={loginHandler}/>}/>
+
+            
+
   )
 }
+
+
+
